@@ -7,9 +7,15 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS OFF)
 
 add_subdirectory(vms/Lua/)
+add_subdirectory(vms/QuickJS)
 
 add_executable(crossffi
     src/main.c
 )
 
-target_link_libraries(crossffi PRIVATE lua::lib)
+target_link_libraries(crossffi
+    PRIVATE
+        lua::lib
+        quickjs::lib
+        m
+)
