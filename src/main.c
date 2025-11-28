@@ -2,15 +2,19 @@
 #include <lauxlib.h>
 #include <lualib.h>
 #include "quickjs.h"
+#include <Python.h>
 
 void test_lua(void);
 void test_quickjs(void);
+void test_python(void);
 
 int main(void) {
     test_lua();
     
     printf("\n=== QuickJS test ===\n");
     test_quickjs();
+
+    test_python();
 
     return 0;
 }
@@ -39,4 +43,10 @@ void test_quickjs(void) {
     JS_FreeValue(ctx, val);
     JS_FreeContext(ctx);
     JS_FreeRuntime(rt);
+}
+
+void test_python(void) {
+    Py_Initialize();
+    PyRun_SimpleString("print('Hello, World from Python!')");
+    Py_Finalize();
 }
