@@ -3,11 +3,11 @@ project(lua-cmake VERSION 1.0.0 DESCRIPTION "Lua build for a project subdirector
 
 option(BUILD_SHARED_LIBS "Build as shared library" ON)
 
-set(srcDir lua-master)
+set(srcDir lua-master/src)
 
 set(srcFiles lapi.c lauxlib.c lbaselib.c lcode.c lcorolib.c lctype.c ldblib.c ldebug.c ldo.c
     ldump.c lfunc.c lgc.c linit.c liolib.c llex.c lmathlib.c lmem.c loadlib.c lobject.c lopcodes.c
-    loslib.c lparser.c lstate.c lstring.c lstrlib.c ltable.c ltablib.c ltests.c ltm.c lundump.c
+    loslib.c lparser.c lstate.c lstring.c lstrlib.c ltable.c ltablib.c ltm.c lundump.c
     lutf8lib.c lvm.c lzio.c)
 
 set(publicHeaderFiles lauxlib.h lua.h luaconf.h lualib.h)

@@ -1,4 +1,4 @@
-bash vms/Python/build.sh
+bash vms/prepare.sh
 
 cmake -B build
 cmake --build build

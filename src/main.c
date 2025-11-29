@@ -22,7 +22,7 @@ int main(void) {
 void test_lua(void) {
     lua_State *L = luaL_newstate();
     luaL_openlibs(L);
-    luaL_dostring(L, "print('Hello, World!')");
+    luaL_dostring(L, "print('Hello Lua World!')");
     lua_close(L);
 }
 
