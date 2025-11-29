@@ -1,7 +1,7 @@
 # vms/Python/CMakeLists.txt
 
 # 设置自定义Python路径
-set(CPYTHON_PATH "/data/wei/CrossFFI/vms/Python/cpython-main" CACHE PATH "Path to custom Python build")
+set(CPYTHON_PATH "./cpython-main" CACHE PATH "Path to custom Python build")
 
 # 检查Python路径
 if(NOT EXISTS ${CPYTHON_PATH})
