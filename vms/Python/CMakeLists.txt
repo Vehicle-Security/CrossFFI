@@ -1,7 +1,8 @@
 # vms/Python/CMakeLists.txt
 
-# 设置自定义Python路径
-set(CPYTHON_PATH "./cpython-main" CACHE PATH "Path to custom Python build")
+# 设置自定义Python路径（相对于当前CMakeLists.txt所在目录）
+get_filename_component(PYTHON_VM_DIR ${CMAKE_CURRENT_LIST_DIR} ABSOLUTE)
+set(CPYTHON_PATH "${PYTHON_VM_DIR}/cpython-main" CACHE PATH "Path to custom Python build")
 
 # 检查Python路径
 if(NOT EXISTS ${CPYTHON_PATH})
@@ -9,8 +10,14 @@ if(NOT EXISTS ${CPYTHON_PATH})
     return()
 endif()
 
-# 查找Python库
-file(GLOB PYTHON_LIBS ${CPYTHON_PATH}/libpython*.a)
+# 查找Python库文件
+file(GLOB PYTHON_LIBS 
+    ${CPYTHON_PATH}/libpython*.a
+    ${CPYTHON_PATH}/libpython*.dylib
+    ${CPYTHON_PATH}/libpython*.so
+)
+
+# 如果找不到库文件，禁用Python支持
 if(NOT PYTHON_LIBS)
     message(WARNING "No Python library found in ${CPYTHON_PATH}. Python support will be disabled.")
     return()
@@ -31,7 +38,6 @@ target_include_directories(python_lib INTERFACE
 target_link_libraries(python_lib INTERFACE
     ${PYTHON_LIB}
     dl
-    m
     pthread
     util
 )

@@ -1,4 +1,0 @@
-Undefined symbols for architecture arm64:
-  "_pthread_set_name_np", referenced from:
-      _main in conftest-4aeb89.o
-ld: symbol(s) not found for architecture arm64
