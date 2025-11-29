@@ -35,3 +35,18 @@ download_python() {
 if [ ! -d "$PYTHON_DIR/cpython-main" ]; then
     download_python
 fi
+
+
+QUICKJS_DIR="$SCRIPT_DIR/QuickJS"
+
+download_quickjs() {
+    cd "$QUICKJS_DIR"
+    curl -L -o quickjs-2025-09-13-2.tar.xz https://bellard.org/quickjs/quickjs-2025-09-13-2.tar.xz
+    tar -xJf quickjs-2025-09-13-2.tar.xz
+    mv quickjs-2025-09-13 quickjs
+    rm -rf quickjs-2025-09-13-2.tar.xz
+}
+
+if [ ! -d "$QUICKJS_DIR/quickjs" ]; then
+    download_quickjs
+fi
