@@ -19,7 +19,7 @@ endif()
 list(GET PYTHON_LIBS 0 PYTHON_LIB)
 message(STATUS "Using Python library: ${PYTHON_LIB}")
 
-# 创建接口库（推荐方式）
+# 创建接口库
 add_library(python_lib INTERFACE)
 
 # 设置包含目录和链接库
@@ -36,7 +36,7 @@ target_link_libraries(python_lib INTERFACE
     util
 )
 
-# 创建别名（确保与target_link_libraries中的名称一致）
+# 创建别名
 add_library(python::lib ALIAS python_lib)
 
 message(STATUS "Python support enabled")
