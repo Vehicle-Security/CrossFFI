@@ -16,4 +16,22 @@ fi
 
 
 # build Python
-bash $SCRIPT_DIR/Python/build.sh
+# bash $SCRIPT_DIR/Python/build.sh
+
+PYTHON_DIR="$SCRIPT_DIR/Python"
+
+download_python() {
+    cd "$PYTHON_DIR"
+    PY_VERSION="3.12.7"
+    PY_TARBALL="Python-$PY_VERSION.tgz"
+    PY_URL="https://www.python.org/ftp/python/$PY_VERSION/$PY_TARBALL"
+
+    curl -L -o "$PY_TARBALL" "$PY_URL"
+    tar -xzf "$PY_TARBALL"
+    mv "Python-$PY_VERSION" "cpython-main"
+    rm -rf "$PY_TARBALL"
+}
+
+if [ ! -d "$PYTHON_DIR/cpython-main" ]; then
+    download_python
+fi

@@ -18,10 +18,6 @@ target_link_libraries(crossffi
     PRIVATE
         lua::lib
         quickjs::lib
+        python::lib
         m
 )
-
-# 可选链接Python库
-if(TARGET python::lib)
-    target_link_libraries(crossffi PRIVATE python::lib)
-endif()

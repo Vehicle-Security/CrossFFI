@@ -1,20 +1,26 @@
 #!/bin/bash
-# get script dir
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-cd "$SCRIPT_DIR/cpython-main"
+CPY="$SCRIPT_DIR/cpython-main"
+INSTALL_DIR="$CPY/install"
+
+cd "$CPY"
+
+# 创建安装目录
+mkdir -p "$INSTALL_DIR"
 
 build_python() {
-    ./configure --enable-shared --prefix=$PWD
-    make -j4
-	make install
+    ./configure --enable-shared --prefix="$INSTALL_DIR"
+    make -j"$(nproc)"
+    make install
 }
 
-# dylib
-PYTHON_LIB_EXIST=$(find "$SCRIPT_DIR/cpython-main/" \( -name "libpython*.a" -o -name "libpython*.dylib" -o -name "libpython*.so" \) 2>/dev/null | head -n 1)
-if [ -z "$PYTHON_LIB_EXIST" ]; then
-    echo "Python library not found, building..."
-    build_python
-else 
-    echo "Python library Exist: $PYTHON_LIB_EXIST"
-fi
+build_python
+
+# 设置环境变量
+export PYTHONHOME="$INSTALL_DIR"
+export PYTHONPATH="$INSTALL_DIR/lib/python3.12"
+export LD_LIBRARY_PATH="$INSTALL_DIR/lib:$LD_LIBRARY_PATH"
+
+echo "PYTHONHOME=$PYTHONHOME"
+echo "PYTHONPATH=$PYTHONPATH"
