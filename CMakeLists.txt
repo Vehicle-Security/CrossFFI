@@ -8,6 +8,7 @@ set(CMAKE_C_EXTENSIONS OFF)
 
 add_subdirectory(vms/Lua/)
 add_subdirectory(vms/QuickJS)
+add_subdirectory(vms/Python)
 
 add_executable(crossffi
     src/main.c
@@ -17,5 +18,6 @@ target_link_libraries(crossffi
     PRIVATE
         lua::lib
         quickjs::lib
+        python::lib
         m
 )
